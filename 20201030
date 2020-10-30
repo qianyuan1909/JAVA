@@ -1,0 +1,193 @@
+import book.BookList;
+import operation.IOperation;
+import user.Admin;
+import user.NormalUser;
+import user.User;
+import java.util.Scanner;
+public class TestDemo {
+    public static User login() {
+        System.out.println("请输入你的名字：");
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.next();
+        System.out.println("请输入你的身份，1是管理员,0是普通用户");
+        int choice = scanner.nextInt();
+        if(choice == 1) {
+            return new Admin(name);
+        }else {
+            return new NormalUser(name);
+        }
+    }
+    public static void main(String[] args) {
+        BookList bookList = new BookList();
+        User user = login();//向上转型
+        while (true) {
+            int choice = user.menu();//1
+            IOperation iOperation = user.doOperation(choice);
+            iOperation.work(bookList);
+        }
+    }
+}
+
+
+package user;
+import operation.*;
+
+import java.util.Scanner;
+public class Admin extends User{
+
+    public Admin(String name) {
+        super(name);
+        this.iOperations =  new IOperation[] {
+                new ExitOperation(),
+                new FindOperation(),
+                new AddOperation(),
+                new DelOperation(),
+                new DisplayOperation(),
+        };
+    }
+
+    @Override
+    public int menu() {
+        //System.out.println("管理员的菜单");
+        System.out.println("hello " + this.name + "欢迎你！");
+        System.out.println("1.查找图书！");
+        System.out.println("2.新增图书！");
+        System.out.println("3.删除图书！");
+        System.out.println("4.显示图书！");
+        System.out.println("0.退出图书！");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        return choice;
+    }
+
+
+}
+package book;
+
+public class BookList {
+
+    private Book[] elem = new Book[10];
+
+    private int usedSize;
+
+    public BookList() {
+        this.elem[0] = new Book("爱在落日余晖时","理查德",14,"影评");
+        this.elem[1] = new Book("爱在黎明破晓前","理查德",14,"影评");
+        this.elem[2] = new Book("爱在午夜降临后","理查德",14,"影评");
+        this.usedSize = 3;
+    }
+
+    //尾插
+    public void setBook(int pos,Book book) {
+        this.elem[pos] = book;
+    }
+
+    public Book getBook(int pos) {
+        return this.elem[pos];
+    }
+
+    public int getUsedSize() {
+        return usedSize;
+    }
+
+    public void setUsedSize(int usedSize) {
+        this.usedSize = usedSize;
+    }
+
+}
+package user;
+import operation.*;
+import java.util.Scanner;
+public class NormalUser extends User{
+    public NormalUser(String name) {
+        super(name);
+        this.iOperations =  new IOperation[] {
+                new ExitOperation(),
+                new FindOperation(),
+                new BorrowOperation(),
+                new ReturnOperation()
+        };
+    }
+
+    @Override
+    public int menu() {
+        System.out.println("hello " + this.name + "欢迎你！");
+        System.out.println("1.查找图书！");
+        System.out.println("2.借阅图书！");
+        System.out.println("3.归还图书！");
+        System.out.println("0.退出图书！");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        return choice;
+    }
+}
+
+package book;
+
+public class Book {
+    private String name;//书名
+    private String author;//作者
+    private int price;//价格
+    private String type;//类型
+    private boolean isBorrowed;//是否被借出
+
+
+    public Book(String name, String author, int price, String type) {
+        this.name = name;
+        this.author = author;
+        this.price = price;
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean isBorrowed() {
+        return isBorrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        isBorrowed = borrowed;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                ", type='" + type + '\'' +
+                //", isBorrowed=" + isBorrowed +
+                ((isBorrowed == true) ? "已经借出" : "未借出")+
+                '}';
+    }
+}

@@ -1,0 +1,217 @@
+import com.sun.org.apache.bcel.internal.generic.ARETURN;
+import com.sun.org.apache.bcel.internal.generic.DRETURN;
+
+import java.util.Arrays;
+
+public class TestDemo {
+    public static void swi(int[] array){//交换序列的值
+        int left = 0;
+        int right = array.length-1;//定义左右起始值
+        while(left < right){
+            int amp = array[left];//交换值
+            array[left] = array[right];
+            array[right] = amp;
+            left++;//交换完成后开始移动
+            right--;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] array = {1,2,3,4,5};
+        swi(array);
+        System.out.println(Arrays.toString(array));
+    }
+    public static void bubbleSort(int[] array){
+        boolean flg = false;//默认不发生交换
+        for(int i = 0;i < array.length-1;i++){//比较的趟数
+            flg = false;
+        for (int j = 0;j < array.length-1-i;j++) {//每一趟比较的次数
+            if (array[j ] > array[j + 1]) {
+                int num = array[j + 1];//中间值存入
+                array[j + 1] = array[j];//交换两个数的值
+                array[j] = num;
+                flg = true;//交换一次就将flg置为ture
+            }
+        }if (flg == false){
+            break;
+            }
+        }
+    }
+    public static void main5(String[] args) {
+        int[] array1 = {2,8,5,7,16,10,9,3,1};
+        bubbleSort(array1);
+        System.out.println(Arrays.toString(array1));//使用冒泡排序
+
+    }
+    public static String judge(int[] array){
+        for (int i = 0;i < array.length-1;i++){
+            if(array[i] > array[i+1]){
+                return "无序";
+            }
+        }return "有序";
+    }
+    public static void main4(String[] args) {
+        int[] array = {1,2,3,16,8};
+        System.out.println(judge(array));
+    }
+    public static String toString(int[] array){
+        if(array == null){
+            return "nothing";
+        }return Arrays.toString(array);//数组字符串输出
+    }
+
+    public static void main3(String[] args) {
+        int[] array1 = {1,2,3,4,5};
+        System.out.println(toString(array1));
+    }
+    public static int[] copy(int[] array){//定义一个输入的数组
+        int[] copy = new int[array.length];//new一个copy数组，令其数组长度等于输入的array数组的长度
+        for(int i = 0;i < copy.length;i++ ){
+            copy[i] = array[i];//进行替换
+        }return array;//返回拷贝数组
+    }
+    public static void main2(String[] args) {
+        int[] array1 = {1,2,3,4,5};
+        System.out.println(Arrays.toString(array1));//输出原数组
+        System.out.println(Arrays.toString(copy(array1)));//输出拷贝数组
+    }
+    public static int dicSearch(int[] array,int key){
+        int left = 0;
+        int right = array.length - 1;
+        while(left <= right){//当左边的值小于右边时进入循环
+           int mid = (left + right)/ 2;//mid的值等于左右相加除以二
+            if (array[mid] > key){
+                right = mid - 1;//当mid大于key时，right = mid-1进行替换
+            }else if (array[mid] < key){//当mid小于key时，right = mid+1进行替换
+                left = mid + 1;
+            }else{
+                return mid;
+            }
+        }    return -1;//返回值为mid
+    }
+
+    public static void main1(String[] args) {
+        int[] array = {12,3,10,9,13,8};
+        System.out.println(dicSearch(array,11));//调用寻找key的二分法寻找
+    }
+}
+import java.util.jar.JarOutputStream;
+
+public class MyArrayList {
+
+    public int[] elem;
+    public int usedSize;
+    public int tmp ;
+    public MyArrayList() {
+        this.elem = new int[10];
+        this.usedSize = 0;
+    }
+    public MyArrayList(int capcity) {
+        this.elem = new int[capcity];
+        this.usedSize = 0;
+    }
+    // 在 pos 位置新增元素
+    public boolean isfull(){
+        if(this.usedSize >=  elem.length){//判断是否已经满了
+            return false;
+        }return true;
+    }
+    public void resize(){
+
+    }
+    public void add(int pos, int data) {
+        if(pos < 0 || pos > this.usedSize) {
+            System.out.println("pos位置不合法");
+            return;
+        }
+        if(this.usedSize == this.elem.length) {
+            System.out.println("顺序表为满！");
+            return;
+        }
+        for (int i = this.usedSize-1;i >= pos;i--) {
+            this.elem[i+1] = this.elem[i];
+        }
+        this.elem[pos] = data;
+        this.usedSize++;//注意
+    }
+    // 打印顺序表
+    public void display() {
+        for (int i = 0; i < this.usedSize; i++) {
+            System.out.print(this.elem[i]+" ");
+        }
+        System.out.println();
+    }
+    // 判定是否包含某个元素
+    public boolean contains(int toFind) {
+        for (int i = 0; i < this.usedSize; i++) {
+            if(this.elem[i] == toFind) {
+                return true;
+            }
+        }
+        return false;
+    }
+    // 查找某个元素对应的位置
+    public int search(int toFind) {
+        for (int i = 0; i < this.usedSize; i++) {
+            if(this.elem[i] == toFind) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    // 获取 pos 位置的元素
+    public int getPos(int pos) {
+        if(pos < 0 || pos >= this.usedSize) {
+            System.out.println("pos位置不合法");
+            return -1;
+        }
+        return this.elem[pos];
+    }
+    // 给 pos 位置的元素设为 value
+    public void setPos(int pos, int value) {
+        if(pos < 0 || pos > this.usedSize) {
+            System.out.println("pos位置不合法");
+            return;
+        }
+        this.elem[pos] = value;
+    }
+    //删除第一次出现的关键字key
+    public void remove(int toRemove) {
+        //1、找到toRemove 的位置  -1
+        int index = search(toRemove);
+        if(index == -1) {
+            System.out.println("没有这个数字");
+            return;
+        }
+        //2、删除
+        //int i = index;
+        for (int i = index; i < this.usedSize-1; i++) {
+            this.elem[i] = this.elem[i+1];
+        }
+        this.usedSize--;
+    }
+    //this.usedSize:5
+    //  一直发生改变
+    //原因：到底是为什么最后一个1没有删
+    //到底usedSize改变的时候，影响的是哪里？
+    public void removeAll(int toRemove) {
+        for (int i = 0; i < this.usedSize; i++) {
+            remove(toRemove);
+        }
+    }
+    // 获取顺序表长度
+    public int size() {
+        return this.usedSize;
+    }
+    // 清空顺序表
+    public void clear() {
+        this.usedSize = 0;
+    }
+}
+public class Test{
+    public static void main(String[] args) {
+        MyArrayList arrayList = new MyArrayList();
+        arrayList.elem = {1,2,3,4,5,6,7};
+        System.out.println(MyArrayList.isfull);
+    }
+}

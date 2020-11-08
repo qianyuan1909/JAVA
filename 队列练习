@@ -1,0 +1,132 @@
+import java.util.Scanner;
+public class Main{
+    public static String Ser(String str){
+        int i = 0;
+        char[] ch = str.toCharArray();//字符串数组化
+        char[] ch2 = new char[101];//用于存放符合条件的字符之后用来输出
+//准备开始遍历
+        for( i = 0; i < str.length() - 1;i++){//定义i，j并套用双重for循环对字符串数组里的内容进行比较
+
+            for(int j = i + 1;j < str.length() ;j++){
+                if(ch[i] == ch[j]){//我判断是这里的问题
+                    continue;//判断到内容重复跳过本次循环
+                   }
+                ch2[i] = ch[i];
+            }
+        }
+        return new String(ch2);//再将ch2记录的内容传回str当中//输出str
+    }
+    public static void  main(String[] args){
+        Scanner in = new Scanner(System.in);
+        String str = in.next();
+        System.out.println(Ser(str));
+    }
+}
+import java.util.*;
+/////有一个List当中存放的是整形的数据，要求使用Collections.sort对List进行排序
+/////删除第一个字符串当中出现的第二个字符串中的字符
+////例如：S听石头人 = "welcome to bit";
+////String str2 = "come";
+////输出结果：wl t bit
+class Student{
+    public String name;
+    public String classes;
+    public double grade;
+    public Student(String name,String classes,double grade ){
+        this.name = name;
+        this.classes = classes;
+        this.grade = grade;
+    }
+}
+/*class MyarrayList{
+    public int[] elem;
+    public int  undersize;
+
+}*/
+/////删除第一个字符串当中出现的第二个字符串中的字符
+////例如：String str1 = "welcome to bit";
+////String str2 = "come";
+////输出结果：wl t bit
+public class TestDemo {
+   /* public static List<String> reaplace(String str1,String str2){
+           List<String> list = new ArrayList<>();
+           for (int i = 0;i < str1.length();i++){
+               char tmp = str1.charAt();
+               if(!str2.contains(tmp+"")){
+                   list.add(tmp + "");
+               }
+           }
+    }*/
+    public static void main(String[] args) {
+
+
+    }
+    public static void main1(String[] args) {
+        List<Student> List = new ArrayList<>();
+        Student student = new Student("wanger","1",100);
+        Student studen1 = new Student("wangsan","2",99);
+        Student studen2 = new Student("wangsi","3",80);
+        List.add(student);
+        List.add(studen1);
+        List.add(studen2);
+        for (Student s:List){
+            System.out.println("姓名："+s.name+" "+"班级"+s.classes+" "+"成绩"+s.grade);
+            //System.out.println(s.classes);
+            //System.out.println(s.grade);
+            System.out.println();
+        }
+    }
+    import java.util.*;
+/////有一个List当中存放的是整形的数据，要求使用Collections.sort对List进行排序
+/////删除第一个字符串当中出现的第二个字符串中的字符
+////例如：S听石头人 = "welcome to bit";
+////String str2 = "come";
+////输出结果：wl t bit
+class Student{
+    public String name;
+    public String classes;
+    public double grade;
+    public Student(String name,String classes,double grade ){
+        this.name = name;
+        this.classes = classes;
+        this.grade = grade;
+    }
+}
+/*class MyarrayList{
+    public int[] elem;
+    public int  undersize;
+
+}*/
+/////删除第一个字符串当中出现的第二个字符串中的字符
+////例如：String str1 = "welcome to bit";
+////String str2 = "come";
+////输出结果：wl t bit
+public class TestDemo {
+   /* public static List<String> reaplace(String str1,String str2){
+           List<String> list = new ArrayList<>();
+           for (int i = 0;i < str1.length();i++){
+               char tmp = str1.charAt();
+               if(!str2.contains(tmp+"")){
+                   list.add(tmp + "");
+               }
+           }
+    }*/
+    public static void main(String[] args) {
+
+
+    }
+    public static void main1(String[] args) {
+        List<Student> List = new ArrayList<>();
+        Student student = new Student("wanger","1",100);
+        Student studen1 = new Student("wangsan","2",99);
+        Student studen2 = new Student("wangsi","3",80);
+        List.add(student);
+        List.add(studen1);
+        List.add(studen2);
+        for (Student s:List){
+            System.out.println("姓名："+s.name+" "+"班级"+s.classes+" "+"成绩"+s.grade);
+            //System.out.println(s.classes);
+            //System.out.println(s.grade);
+            System.out.println();
+        }
+    }

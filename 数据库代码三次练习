@@ -1,0 +1,74 @@
+drop table if exists staff;
+create table if not exists staff
+(
+   id  int comment '员工编号',
+   name varchar(32) comment '员工姓名',
+   duty  varchar(12) comment '员工职务'
+);
+insert into staff values (1,'张三', 'CEO'); 
+insert into staff values (2,'李四', '员工'); 
+insert into staff values (3,'王五', '经理'); 
+drop table if exists schedule;
+create table if not exists schedule
+(
+  id int primary key auto_increment,
+  arrive timestamp comment'签到时间',
+  staff_id int comment '员工 ID'
+);
+ foreign key (staff) references staff(id)
+drop table if exists dorm;
+create table if not exists dorm
+(
+   id  int comment '员工编号',
+   dormname varchar(32) comment '宿舍信息',
+   studentname varchar(12) comment '学生信息'
+);
+insert into staff values (1,'515', '张三'); 
+select * from dorm;
+drop table if exists user;
+create table if not exists user
+(
+   id  int primary key auto_increment,
+   name varchar(32) comment '用户姓名',
+   username varchar(12) comment '用户信息'
+);
+drop table if exists car;
+create table if not exists car
+(
+   id  int primary key auto_increment,
+   name varchar(32) comment '车辆品牌',
+   carname varchar(12) comment '车辆信息'
+);
+drop table if exists information;
+create table information (
+   id int primary key auto_increment,
+   sn int unique,
+   informations varchar(20) default 'unkown',
+   user_id int,
+FOREIGN KEY (user_id) REFERENCE user,
+);
+car_id int,
+FOREIGN KEY (car_id) REFERENCES car
+////////////////
+drop table if exists user;
+create table if not exists user
+(
+   id  int primary key auto_increment,
+   name varchar(32) comment '用户姓名',
+   username varchar(12) comment '用户信息'
+);
+drop table if exists car;
+create table if not exists car
+(
+   id  int primary key auto_increment,
+   name varchar(32) comment '车辆品牌',
+   carname varchar(12) comment '车辆信息'
+);
+drop table if exists information;
+create table information (
+   id int primary key auto_increment,
+   sn int unique,
+   informations varchar(20) default 'unkown',
+   user_id int,
+FOREIGN KEY (user_id) REFERENCE user,
+);

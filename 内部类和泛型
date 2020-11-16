@@ -1,0 +1,101 @@
+package inner;
+//1.实例内部类
+//2.静态内部类
+//3.匿名内部类
+//4.本地内部类//基本不用
+//
+//如何拿到一个静态内部类的
+//静态内部类当中，是不可以访问外部类对象的静态成员的
+/*class OuterClass{
+    public  int data1;
+    private  int data2;
+    public static int data3;
+    class Innerclass{//内部类,相当于外部类的实例内部成员
+        public int data4 = 4;
+
+        public static final int data5 = 5;
+        //public static int data5;不能在实例内部类当中定义一个静态的变量
+        public void test(){
+            System.out.println(data4);
+            System.out.println(OuterClass.this.data1);//访问输出外部类的实例化成员
+            //System.out.println(data1);可以访问外部类实例对象成员
+            //System.out.println(data2);
+            //System.out.println(data3);
+        }
+    }
+    //拿到实力内部类对象的方式
+    //不能在实例内部类当中定义一个静态的变量
+    //非要定义，在编译时期能够确定的值,即就是加上final
+    //实例内部类是否有额外的开销 有，通过外部类点this来访问
+    //this---》 静态的 Outerclass.this
+    //每一个类都会产生一个字节码文件
+    //内部类的字节码文件 外部类$内部类名.class
+}*/
+class Outer{
+    public void test(){
+        System.out.println("test");
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) {
+     new Outer(){
+         @Override
+         public void test() {//重写了text方法
+             System.out.println("hello world");
+         }
+     }.test();
+    }
+}
+//    public static void main(String[] args) {
+//        OuterClass outerClass = new OuterClass();
+//        OuterClass.Innerclass innerclass =
+//                outerClass.new Innerclass();//通过外部类对象的引用点来new一个内部类对象
+//        innerclass.test();
+//    }
+//}
+import java.util.ArrayList;
+//泛型的特点：1.
+class Gla<T extends Comparable<T>>{//写一个泛型实现任意类型数组的比较
+    public T maxValue(T[] array ){
+        T max = array[0];
+        for (int i = 0;i < array.length;i++){
+            if(array[i].compareTo(max) > 0){
+                max = array[i];
+            }
+        }
+        return max;
+    }
+}
+//泛型方法，可以直接通过类名访问方法
+class Gla2<T extends Comparable<T>>{//写一个泛型实现任意类型数组的比较
+    public static <T extends Comparable<T>> T maxValue(T[] array ){//static指定类型
+        T max = array[0];
+        for (int i = 0;i < array.length;i++){
+            if(array[i].compareTo(max) > 0){
+                max = array[i];
+            }
+        }
+        return max;
+    }
+}
+class  Myprint<T>{
+    public  void printf(ArrayList<T> list){
+        for(T val : list){
+            System.out.println(val);
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) {//
+        Integer[] array = {1,23,45,67,13,2,456,78};//写成包装类
+        Gla<Integer> gla = new Gla<>();//尖括号中存放的的是输入的类型，对泛型方法初始化
+        System.out.println(gla.maxValue(array));
+        System.out.println(Gla2.maxValue(array));
+        Myprint<Integer> arraylist = new Myprint<>();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(10);
+        arrayList.add(20);
+        arrayList.add(30);
+        arraylist.printf(arrayList);
+    }
+}

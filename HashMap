@@ -1,0 +1,87 @@
+package MAP;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.*;
+
+/**
+ * @Version 1.0
+ * @Author:zbh
+ * @Date:2020/11/17 Content:
+ */
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        ArrayList<Integer> list = new ArrayList<>();
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = 0;i < nums1.length;i++){
+             list.add(nums1[i]);
+        }
+        for (int i : nums2){
+            set.add(i);
+        }
+        if (set.contains())
+    }
+}
+public class TestDemo {
+
+    public static void main3(String[] args) {
+        HashMap<Integer,Integer> map = new
+                HashMap<>();
+        ArrayList<Integer> list = new
+                ArrayList<>();
+        Random random = new Random();
+        for (int i = 0;i < 100000;i++){
+            int num = random.nextInt(100000);
+            list.add(num);
+        }
+        //遍历list
+        for (Integer key : list) {//写类型，定义变量属于后面的集合，写入集合
+            if(map.get(key) == null){//如果之前没有放过，则加一
+                map.put(key,1);
+            }else {//否则的话，在它的基础上加一
+                int val = map.get(key);
+                map.put(key,val + 1);
+            }
+            for (Map.Entry<Integer,Integer>entry:map.entrySet()) {
+                    if (entry.getValue() > 1){
+                        System.out.println("重复的数字是"+entry.getKey()+"重复的次数为"+entry.getValue());
+                    }
+            }
+        }
+    }
+    public static void main2(String[] args) {
+        ArrayList<Integer> list = new
+                ArrayList<>();
+        Random random = new Random();
+        for (int i = 0;i < 100000;i++){
+            int num = random.nextInt(100000);
+            list.add(num);
+        }
+        HashSet<Integer> set = new
+                HashSet<>();
+        for (int i = 0;i < 100000;i++){
+            if(set.contains(list.get(i))){//contains判断值是否在集合中
+                System.out.println(list.get(i));
+            }else{
+                set.add(list.get(i));
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Map<String,String> map = new HashMap<>();
+        map.put("八戒","悟能");
+        System.out.println(map.get("八戒"));
+        HashSet<Integer> set = new HashSet<>();
+        set.add(11);
+        set.add(12);
+        set.add(11);
+        set.add(12);
+        set.add(11);
+        set.add(12);
+        set.add(11);
+        set.add(12);
+        System.out.println(set);
+    }
+}

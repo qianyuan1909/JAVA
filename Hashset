@@ -1,0 +1,88 @@
+import java.util.*;
+
+/**
+ * @Version 1.0
+ * @Author:zbh
+ * @Date:2020/11/18 Content:
+ */
+//示例 1：
+//
+//        输入：nums1 = [1,2,2,1], nums2 = [2,2]
+//        输出：[2,2]
+//        示例 2:
+//
+//        输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+//        输出：[4,9]
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+       LinkedList<Integer> list = new LinkedList<>();
+        for (int key : nums1){
+            if (!map.containsKey(key)){//不存在key的时候，把key传入
+                map.put(key,1);
+            }else {
+                int tmp = map.get(key);
+                map.put(key,tmp+1);//存在的时候给value值加一
+            }
+        }/////键值对已经存放完毕
+        for (int i : nums2) {
+            if (map.containsKey(i) && map.get(i) > 0){//遍历数组2，对map进行判断，如果存在，则将该数存入
+                list.add(i);
+                int tmp = map.get(i);
+                map.put(i,tmp - 1);
+            }
+        }
+        int size = list.size();
+        int[] arr = new int[size];
+        for (int i = 0;i < size;i++){
+            arr[i] = list.poll();
+        }
+        return arr;
+    }
+}
+//示例 ：
+//
+//        输入：nums1 = [1,2,2,1], nums2 = [2,2]
+//        输出：[2]
+//        示例 2：
+//        输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+//        输出：[9,4]
+
+//class Solution1 {
+//    public int[] intersection(int[] nums1, int[] nums2) {
+//       HashSet<Integer> set = new HashSet<>();
+//       LinkedList<Integer> list = new LinkedList<>();
+//       HashSet<Integer> set2 = new HashSet<>();
+//        for (int i : nums1) {//把nums1传入set中
+//            set.add(i);
+//        }
+//        for (int i = 0;i < nums2.length;i++){
+//
+//        }return null;
+//    }
+//}
+class Solution2 {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        LinkedList<Integer> res = new LinkedList<>();
+        HashSet <Integer> set = new HashSet<>();//定义一个set
+        for (int num : nums1) {
+            set.add(num);//遍历导入
+        }
+        for (int i : nums2) {//开始遍历数组2
+            if(set.contains(i)) {
+                res.add(i);
+                set.remove(i);//同时删除set中的这个值
+            }
+        }
+        int size = res.size();
+        int[] arr = new int[size];
+        for (int i = 0;i < size;i++){
+            arr[i] = res.poll();
+        }
+        return arr;
+    }
+}
+public class TestDemo {
+
+}

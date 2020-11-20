@@ -1,0 +1,69 @@
+class HashBuck {
+    static class Node {
+        public int data;
+        public Node next;
+        public int value;
+        public Node(int data,int value) {
+            this.data = data;
+            this.value = value;
+        }
+    }
+    public Node[] array;
+    public int usedSize;
+    public HashBuck() {
+        this.array = new Node[10];
+        this.usedSize = 0;
+    }
+    public void put(int key,int value){
+        int index = key % this.array.length;//找到位置
+         //遍历该位置下的链表
+        for(Node cur = array[index];cur != null;cur = cur.next){
+            if(cur.data == key){
+                cur.value = value;
+                return;
+            }
+        }
+        //没有和key值相同的元素，开始头插法
+        Node node = new Node(key,value);
+        node .next = array[index];
+        array[index] = node;
+        this.usedSize++;
+        if(loadFactor() > 0.75){
+            resize();
+        }
+    }
+    public float loadFactor(){
+        return this.usedSize*1.0f / this.array.length;
+    }
+    public void resize(){
+        Node[] newArray = new Node[2*this.array.length];
+        for (int i = 0; i < this.array.length; i++) {
+            Node curNext = null;
+            for(Node cur = array[i]; cur != null;cur = curNext) {
+                curNext = cur.next;
+                //array[i] 下标是一个链表
+                //cur 头结点
+                int index = cur.data % newArray.length;
+                cur.next = newArray[index];
+                newArray[index] = cur;
+            }
+        }
+        this.array = newArray;
+    }
+    public int getValue(int key){
+        int index = key % array.length;//获得下标
+        for (Node cur = array[index];cur != null;cur = cur.next){
+            if (cur.data == key){
+                return cur.value;
+            }
+        }return -1;
+////        for (Node i:array) {
+////            if (i.data == key){
+////                return i.value;
+////            }
+//        }
+    }
+
+}
+public class TestDemo {
+}

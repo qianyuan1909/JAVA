@@ -1,0 +1,79 @@
+import java.util.Scanner;
+import java.util.*;
+/**
+ * @Version 1.0
+ * @Author:zbh
+ * @Date:2020/11/26 Content:
+ */
+
+
+public class Main {
+    public static int judgeApple(int tmp){
+        if(tmp < 6 || tmp == 10 || tmp % 2 != 0){
+            return -1;
+        }//如果是6或者8的倍数则一定可以买
+            if (tmp % 8 == 0){
+                return tmp / 8;
+            }
+            return 1 + tmp / 8;
+
+    }
+    public static void main2(String[] args) { ///奸诈的小贩只提供6个或者8个整袋的苹果，如果不能够购买到的话就不买了
+        //输出一个整数表示最少需要购买的袋数，如果不能，则输出-1
+      Scanner scan = new Scanner(System.in);
+      int tmp = scan.nextInt();
+        System.out.println(judgeApple(tmp));
+
+      }
+
+    public static void main1(String[] args) {///读入一个字符串，输出其中最长的数字串
+        Scanner scan = new Scanner(System.in);
+        String str = scan.nextLine();
+        char[] chars = str.toCharArray();
+        int count = 0;
+        String result = "";
+        for (int i = 0;i < chars.length;i++){
+            if (chars[i] >= '0' && chars[i] <= '9'){
+                count = 1;//每次重新初始化count
+                int index = i;//也将index从i进行赋值
+                for (int j = i + 1;j < chars.length;j++){//二重循环继续判断是否为数字
+                    if (chars[j] >= '0' && chars[j] <= '9'){//是数字
+                        count++;//count开始计数
+                        index = j;//索引等于j
+                    }else {
+                        break;//不为数字跳出循环
+                    }
+                }if (count > result.length()){  //判断count和返回数组长度的大小，如果大于返回数组长度
+                    result = str.substring(i,index+1);//左开右闭
+                }
+            }else {
+                continue;
+            }
+        }
+        System.out.println(result);
+    }
+}
+//输入一个括号字符串，判断其是否合法，包括左右字符串数量相等，合法括号串表示字符串中全是括号,并且左右括号数量相等
+ class Parenthesis {
+    public boolean chkParenthesis(String A, int n) {
+        if(n % 2 != 0){///如果括号数为
+            return false;
+        }
+        Stack<Character> stackleft = new Stack<>();
+        Stack<Character> stackright = new Stack<>();
+        char[] chars = A.toCharArray();//将输入进来的括号转为字符数组
+        for (int i = 0;i < chars.length;i++){//开始遍历整个字符串
+            if(chars[i] == '('){
+                stackleft.push(chars[i]);
+            }else if(chars[i] == ')'){
+                stackright.push(chars[i]);
+           }//else {//如果还要判断是不是全为括号就加上这个条件
+//                return false;
+//            }
+        }///到这个时候所有的括号都被压入了栈中,准备开始判断
+        if(stackleft.size() == stackright.size()){
+            return true;
+        }
+        return false;
+    }
+}

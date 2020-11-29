@@ -1,0 +1,95 @@
+/**
+ * @Version 1.0
+ * @Author:zbh
+ * @Date:2020/11/29 Content:
+ */
+
+
+import java.util.Scanner;
+public class Main{
+    /*
+输入n个整数，输出出现次数大于等于数组长度一半的数。
+输入描述:
+每个测试输入包含 n个空格分割的n个整数，n不超过100，其中有一个整数出现次数大于等于n/2。
+输出描述:
+输出出现次数大于等于n/2的数。
+示例1
+输入
+3 9 3 2 5 6 7 3 2 3 3 3
+输出
+3
+关键方法：
+str.split(" "):按照空格切分字符串
+Integer.valueOf(str):将数字字符串转为int
+还是主要考察字符串的方法的使用，看来字符串的使用是非常重要的
+ */
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        while (in.hasNext()) {
+            String str = in.nextLine();
+            String[] strs = str.split(" ");
+            int[] arr = new int[strs.length];
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] = Integer.valueOf(strs[i]);
+            }
+            int num = arr[0];
+            int count = 0;
+            for (int j = 1; j < arr.length; j++) {
+                if (arr[j] == num) {
+                    count++;
+                } else if (count > 0) {
+                    count--;
+                } else {
+                    num = arr[j];
+                }
+            }
+            System.out.println(num);
+        }
+    }
+    /*
+A,B,C三个人是好朋友,每个人手里都有一些糖果,我们不知道他们每个人手上具体有多少个糖果,但是我们知道以下的信息：
+A - B, B - C, A + B, B + C. 这四个数值.每个字母代表每个人所拥有的糖果数.
+现在需要通过这四个数值计算出每个人手里有多少个糖果,即A,B,C。这里保证最多只有一组整数A,B,C满足所有题设条件。
+这道题目的实质是：判断三元一次方程组是否有解及求解。
+把题目条件用方程式表示：
+A-B=Y1;
+B-C=Y2;
+A+B=Y3;
+B+C=Y4;
+用消元法求解：
+A=(Y1+Y3)/2;
+B=(Y3-Y1)/2=(Y2+Y4)/2;
+C=(Y4-Y2)/2;
+由于题目给出的是整数，要求解也是整数，这个约束条件也需要注意下。
+不满足约束条件就是没解，就可以输出NO了，满足所有的约束条件那就是有解。
+代码如下：
+ */
+    public static void main1(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int y1,y2,y3,y4;
+        float a,b,c;
+        while (in.hasNextInt()) {
+            y1 = in.nextInt();
+            y2 = in.nextInt();
+            y3 = in.nextInt();
+            y4 = in.nextInt();
+            a=(y1+y3)/2f;
+            b=(y3-y1)/2f;
+            c=(y4-y2)/2f;
+            if((a-((y1+y3)/2))!=0){
+                System.out.print("No");
+                return ;
+            }
+            if((b-((y3-y1)/2)!=0)||(b!=((y2+y4)/2))){
+                System.out.print("No");
+                return ;
+            }
+            if((c-((y4-y2)/2))!=0){
+                System.out.print("No");
+                return ;
+            }
+            //满足所有的约束条件，输出解。
+            System.out.print((int)a+" "+(int)b+" "+(int)c);
+        }
+    }
+}

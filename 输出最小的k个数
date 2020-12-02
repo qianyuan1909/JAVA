@@ -1,0 +1,50 @@
+public class Main{
+//求一组数据的最小的K个
+    public static void findKSmall(int[] arr){
+        int k = arr[arr.length-1];
+        if (k < 0){
+            k = k * (-1);
+        }
+        int[] val = new int[arr.length-1];
+        for (int i = 0; i < val.length ; i++) {
+            val[i] = arr[i];
+        }
+        if (k > val.length){
+            System.out.println(0);
+        }
+        for (int i = 1; i < val.length; i++) {
+            int tmp = val[i];
+            int j = i-1;
+            for (; j >= 0 ; j--) {
+                if(val[j] > tmp) {
+                    val[j+1] = val[j];
+                }else {
+                    //array[j+1] = tmp;
+                    break;
+                }
+            }
+            val[j+1] = tmp;
+        }
+        int[] tmp = new int[k];
+        for (int i = 0; i < k ; i++) {
+            tmp[i] = val[i];
+        }
+        for (int s:tmp) {
+            System.out.print(s+" ");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextInt()){
+            String s = sc.nextLine();
+            String [] str=s.split(" ");
+            int [] arr= new int[str.length];
+            for(int i=0;i<str.length;i++){
+                arr[i]=Integer.parseInt(str[i]);
+            }
+            findKSmall(arr);
+        }
+    }
+
+}

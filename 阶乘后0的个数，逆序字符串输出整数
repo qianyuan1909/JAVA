@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+/**
+ * @Version 1.0
+ * @Author:zbh
+ * @Date:2020/12/3 Content:
+ */
+public class Main {
+    public static String reversed(int num){
+        String str = "";
+        while (num != 0){
+            str += num % 10;
+            num = num / 10;
+
+        }
+        return str;
+    }
+    public static void main(String[] args) {
+        Scanner scanner1 = new Scanner(System.in);
+        int num = scanner1.nextInt();
+        System.out.println(reversed(num));
+
+    }
+    public static int zero(int tmp){
+        int[] arr = new int[tmp];
+        int count = 0;
+        for (int i = 0;i < tmp;i++){//构建出阶乘中所需要的数
+            arr[i] = i + 1;
+        }//已经传入所有数
+        for (int i = 0;i < arr.length;i++){//遍历数组
+          if(arr[i] % 5 == 0 ){//先判断是不是5的倍数
+              int num = arr[i];
+               while (num / 5 != 0 && num % 5 == 0 ){//再判断除以5之后不为0且还是5的倍数
+                   count++;
+                   num = num / 5;
+               }
+           }
+       }
+       return count;
+    }
+    public static void main1(String[] args) {///求一个阶乘末尾0的个数
+        Scanner scanner = new Scanner(System.in);
+        int tmp = scanner.nextInt();
+
+        System.out.println(zero(tmp));
+
+    }
+}

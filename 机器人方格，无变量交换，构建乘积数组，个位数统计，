@@ -1,0 +1,71 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * @Version 1.0
+ * @Author:zbh
+ * @Date:2020/12/6 Content:
+ */
+
+public class Main {//个位数统计
+//解题思路，将给定的数字按照每位拆分为单个数字保存在list中，每碰到一个相同的数字就加1，扫描完整个字符串后遍历输出list合集即可
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String N = sc.next();
+        char[] chars = N.toCharArray();
+        //list有10个item表示0~9，每个item表示数字的个数
+        //
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0;i < 10;i++){
+            list.add(0);//初始化每个item都是0
+        }
+        for (int i = 0;i < chars.length;i++){
+            //每遇到一个数字，就把值加1
+            list.set(chars[i] - '0',list.get(chars[i] - '0')+1);
+        }
+        for (int i =0;i < list.size();i++){
+            if (list.get(i) > 0){
+                System.out.println(i+":"+list.get(i));
+            }
+        }
+    }
+}
+class Exchange {
+    public int[] exchangeAB(int[] AB) {//不使用中间变量交换数组中的两个值
+        AB[0]^= AB[1];
+        AB[1] = AB[0]^AB[1];
+        AB[0]^= AB[1];
+        return AB;
+    }
+}
+class robot{//机器人在x*y的矩阵中行走，要么向下，要么向右，如果向下走，问题就变成了求（x-1）Y矩阵的机器人走法
+    //如果向右走，问题就变成了求（Y-1）X矩阵的机器人走法
+    //所以使用递归解法
+    public int countways(int x,int y){
+        if(x == 1 || y == 1){
+            return 1;
+        }
+        return countways((x - 1),y)+countways(x,(y - 1));
+    }
+}
+class Soulution{
+    public int[] multiply(int[] A){
+        int length = A.length;
+        int[] B = new int[length];
+        if (length != 0){
+            B[0] = 1;
+            //计算下三角连乘
+            for (int i = 1;i < length;i++){
+                B[i] = B[i - 1] * A[i - 1];
+            }
+            int temp = 1;
+            //计算上三角连乘
+            for (int j = length -2;j >= 0;j--){
+                temp *= A[j+1];
+                B[j] *= temp;
+            }
+        }
+        return B;
+    }
+}

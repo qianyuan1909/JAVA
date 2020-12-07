@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link href="mystyle.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <h1> myname</h1>
+    <p> maybe </p>
+</div>
+<div>
+    <h2>hobby</h2>
+    <ul>
+        <li>上课</li>
+        <li>睡觉</li>
+        <li>打豆豆</li>
+        <li>打<span>游戏</span></li>
+    </ul>
+</div>
+<h2>myjob</h2>
+<div>
+    <ol>
+        <li>字节</li>
+        <li><a href = "https://www.qq.com">腾讯</a></li>
+        <li>大连安全</li>
+    </ol>
+</div>
+
+<hr><!-- 分割线 -->
+<div id="container"></div>
+</body>
+</html>
+
+
+h1 {
+    text-align: center;
+    font-size: 100px;
+    color: #ff7700;
+}
+
+body {
+    background-image: url("resources/001.jpg");
+}
+
+div.hobby li {
+    color: blue;
+}
+
+div.hobby li:hover {
+    color: red;
+}

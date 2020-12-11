@@ -1,0 +1,47 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: ASUS
+  Date: 2020/12/10
+  Time: 0:37
+  To change this template use File | Settings | File Templates.
+--%>
+<%
+request.setCharacterEncoding("utf-8");
+String name = request.getParameter("name");
+%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link href="mystyle.css" rel="stylesheet">
+</head>
+<body>
+<div>访问次数:"count"</div>
+<div>
+    <h1> <%= name %>></h1>
+    <p> maybe </p>
+</div>
+<div>
+    <h2>hobby</h2>
+    <ul>
+        <li>上课</li>
+        <li>睡觉</li>
+        <li>打豆豆</li>
+        <li>打<span>游戏</span></li>
+    </ul>
+</div>
+<h2>myjob</h2>
+<div>
+    <ol>
+        <li>字节</li>
+        <li><a href = "https://www.qq.com">腾讯</a></li>
+        <li>大连安全</li>
+    </ol>
+</div>
+
+<hr><!-- 分割线 -->
+<div id="container"></div>
+</body>
+</html>

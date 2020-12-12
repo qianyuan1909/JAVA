@@ -1,0 +1,128 @@
+1、显示所有数据库
+show databases;
+2、创建数据库
+create  database 数据库名 character set utf8mb4;
+--没有才创建，有不做任何操作
+create database if not exists 数据库名 character set utf8mb4
+3、使用数据库（操作表，数据，先进入数据库，再操作）
+use 数据库名
+4、删除数据库
+drop database 数据库名//删除数据库
+drop database if  exists rushing//如果不存在则不进行任何操作
+5、create  database rushing character set utf8mb4;//建立一个名称为rushing的数据库
+////////////
+-- 客户
+create table if not exists customer
+(
+   customer_id  int comment '客户编号',
+   name varchar(32) comment '客户姓名',
+   address  varchar(256) comment '客户地址',
+   email  varchar(64) comment '电子邮箱',
+   sex bit comment '性别',
+   card_id varchar(18) comment '身份证'
+);
+-- 购买
+create table if not exists purchase
+(
+   order_id  int comment '订单号',
+   customer_id int comment '客户编号',
+   goods_id  int comment '商品编号', 
+   nums  int comment '购买数量'
+);
+////////
+drop table if exists teacher;
+create table teacher(
+id int,
+name varchar(20) comment '姓名',
+age int comment '年龄',
+stature int comment '身高',
+weight int comment '体重',
+sex bit comment '性别',
+education varchar(20) comment '学历',
+birthday varchar(4) comment '生日',
+card_id varchar(18) comment '身份证号',
+resume text
+);
+create table if not exists goods
+(
+   goods_id  int comment '商品编号',
+   goods_name varchar(32) comment '商品名称',
+   unitprice   comment '单价，单位分',
+   category  varchar(12) comment '商品分类',
+   provider  varchar(64) comment '供应商名称'
+);
+
+////////
+drop table if exists book;
+create table book(
+id int,
+name varchar(20) comment '名称',
+price int comment '价格',
+auctor varchar(20) comment '作者',
+classify varchar(20) comment '分类',
+resume text
+);
+////////////////////////
+drop table if exists supermarkt;
+create table supermarkt(
+id int,
+name varchar(20) comment '商品名称',
+price int comment '商品价格',
+inventory int comment '库存',
+classify varchar(20) comment '分类',
+resume text
+);
+//////////
+“学生书包”、价格18.91、库存101、描述为空
+
+insert into supermarkt values (1,'学生书包', 18.91, 101,'文具');
+
+insert into goods values (1,'学生书包', 18.91, 101, classify is null); 
+/////
+drop table if exists goods;
+create table if not exists goods
+(
+   goods_id  int comment '商品编号',
+   goods_name varchar(32) comment '商品名称',
+   unitprice  decimal(4,2) comment '单价',
+   category  varchar(12) comment '商品分类',
+   repertory int comment '库存'
+);
+insert into goods (goods_id,goods_name,unitprice,repertory) values
+(1,'学生书包',18.91,101);
+select * from goods;
+/////
+drop table if exists books;
+create table if not exists books
+(
+   books_id  int comment '数据编号',
+   name varchar(32) comment '书籍名称',
+   unitprice  decimal(4,2) comment '单价',
+   category  varchar(50) comment '书籍分类',
+   author  varchar(20) comment '作者'
+);
+insert into books (books_id,name,unitprice,category,author) values
+(1,'JAVA核心技术',56.43,'计算机技术','Cay S. Horstman');
+select * from books;
+/////////////
+drop table if exists record;
+create table record(
+	name varchar(20),
+	start_time timestamp default now(),
+	end_time timestamp default now()
+);
+insert into record values('白骨精', '2020-04-01 14:00:00', '2020-04-19 00:00:00');
+insert into record values('狐狸精', '2020-04-10 14:00:00', '2020-04-23 00:00:00');
+insert into record values('蜘蛛精', '2020-04-20 14:00:00', '2020-04-22 00:00:00');
+insert into record values('鸡精', '2020-04-18 14:00:00', '2020-04-19 00:00:00');
+select * from record where start_time >= 2020-04-05 00:00:00 and end_time <= 2020-04-17 00:00:00;
+select * from books;    //查表
+update books set unitprice = 61 where name = 'JAVA核心技术';  //修改其中的数据
+insert into goods (goods_id,goods_name,unitprice,repertory) values
+(2,'老师书包',66,201);
+insert into goods (goods_id,goods_name,unitprice,repertory) values
+(3,'领导书包',88,301);
+insert into goods (goods_id,goods_name,unitprice,repertory) values
+(4,'大领导书包',38,301);
+delete from goods where unitprice > 60 or repertory < 200;//删除表中数据
+update goods set unitprice = unitprice + 30  where repertory > 30; 

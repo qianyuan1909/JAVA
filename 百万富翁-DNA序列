@@ -1,0 +1,44 @@
+import java.lang.Math;
+public class Main{
+    public static void main(String[] args){
+        long Richman=0;
+        long Strangerman=0;
+        for(int i=1;i<=30;i++){
+            Richman+=10;
+            Strangerman=Strangerman+(long)Math.pow(2,i-1);
+        }
+        System.out.print(Richman+" "+Strangerman);
+    }
+}
+
+import java.util.Scanner;
+ 
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        int n = sc.nextInt();
+        
+        
+        int start = 0;
+        int max = 0;
+        for(int i = 0;i<=str.length()-n;i++){
+            int count = 0;
+            for(int j = i;j<i+n;j++){
+                if(str.charAt(j) == 'G'||str.charAt(j) == 'C'){
+                    count ++;
+                }
+                   if(count > max){
+                        max = count;
+                        start = i;
+                     }
+                
+           }
+       }
+            
+        for(int i = start;i< start+n;i++){
+            System.out.print(str.charAt(i));
+        }
+        
+    }
+}

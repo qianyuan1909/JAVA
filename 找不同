@@ -1,0 +1,23 @@
+/**
+ * @Version 1.0
+ * @Author:zbh
+ * @Date:2020/12/18 Content:
+ */
+//给定两个字符串 s 和 t，它们只包含小写字母。
+//
+//        字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。
+//
+//        请找出在 t 中被添加的字母。
+//
+//题解思路，自己异或自己为0，0异或其他为其他
+public class Main {
+    public char findTheDifference(String s, String t) {
+      String arr = s + t;
+      char[] chars = arr.toCharArray();
+      char res = 0;
+        for (char r: chars) {
+           res ^= r;
+        }
+        return res;
+    }
+}

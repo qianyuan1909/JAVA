@@ -1,0 +1,16 @@
+它是第一个数组的第一个数和第二个数组的每一个数都比较过去。此题必须是平行比较，第一个数组第二个必须比的是第二个数组的第二个，
+第三个比的是第三个，所以我们必须要让两个数组的变量同时增加，同时又要确保循环能转动起来，我选用了while循环，当两个循环变量都小于3的时候它就会一直比较滚动下去。
+class Solution {
+    public int game(int[] guess, int[] answer) {
+        int sum = 0;
+        int i = 0;
+        int x = 0;
+        while(i<3&&x<3){
+        if(guess[i++]==answer[x++])
+            sum++;
+        }
+        return sum;
+            }
+        
+        
+    }

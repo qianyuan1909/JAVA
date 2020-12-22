@@ -1,0 +1,35 @@
+给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+
+ 
+
+示例：
+
+s = "leetcode"
+返回 0
+
+s = "loveleetcode"
+返回 2
+
+class Solution {
+        public int firstUniqChar(String s) {
+            ///变成字符串数组
+            ///建立起键值对
+            ///如果能够获得key>0;返回1；
+            ///否则返回0
+            HashMap<Character,Integer> map = new HashMap();
+            char[] ch = s.toCharArray();
+            for (int i = 0;i < ch.length;i++){
+                 if (!map.containsKey(ch[i])){//建好键值对
+                     map.put(ch[i],1);
+                 } if (map.containsKey(ch[i])){
+                     int tmp = map.get(ch[i]);
+                     map.put(ch[i],tmp+1);
+                 }
+            }
+            for (int i = 0;i < ch.length;i++){
+                if (map.get(ch[i]) == 1);
+                return i;
+            }
+            return -1;
+        }
+    }
